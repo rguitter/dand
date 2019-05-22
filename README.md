@@ -1,6 +1,12 @@
 # dand
 Udacity Data Analyst Nanodegree
 
+## Project 1 - Explore weather trends
+
+This project explores the fluctuations of the average weather temperature in the world and two other cities : Sidney and Brussels where I'm currently living. From the comparison I identified few trends and proposed some possible explorations to go further in the explaination of the trends.
+
+Go to [Project 1 - Explore weather trends](P1-explore_weather_trends)
+
 ## Project 2 - Investigate a Dataset
 
 This analysis on movie data aims to figure out over the past six decades :
@@ -21,4 +27,4 @@ After completing the project, I learn how to:
 *Be familiar with pandas' Series and DataFrame objects, which let you access your data more conveniently
 * Know how to use Matplotlib to produce plots showing your findings
 
-[Project 2 - Investigate a Dataset](P2-investigate _a_dataset)
+Go to [Project 2 - Investigate a Dataset](P2-investigate _a_dataset)
