@@ -27,4 +27,17 @@ After completing the project, I learn how to:
 *Be familiar with pandas' Series and DataFrame objects, which let you access your data more conveniently
 * Know how to use Matplotlib to produce plots showing your findings
 
-Go to [Project 2 - Investigate a Dataset](P1-investigate_a_dataset)
+Go to [Project 2 - Investigate a Dataset](P2-investigate_a_dataset)
+
+## Project 3 - Analyze A/B Test Results
+
+A/B tests are very commonly performed by data analysts and data scientists. 
+
+This project aim at understand the results of an A/B test run by an e-commerce website. The company has developed a new web page in order to try and increase the number of users who "convert," meaning the number of users who decide to pay for the company's product. The final purpose is to decide rather or not to release the new design because it should lead to a higher conversion rate.
+
+After completing the project, I learn:
+* how I can use several "tools" to analyze observations: Probability, statitics and supervised traineing
+* how they differ one from another and when one is more relevant.
+
+Go to [Project 3 - Analyze A/B testing](P3-AB_Analysis)
+
