@@ -27,4 +27,4 @@ After completing the project, I learn how to:
 *Be familiar with pandas' Series and DataFrame objects, which let you access your data more conveniently
 * Know how to use Matplotlib to produce plots showing your findings
 
-Go to [Project 2 - Investigate a Dataset](P2-investigate _a_dataset)
+Go to [Project 2 - Investigate a Dataset](P1-investigate_a_dataset)
