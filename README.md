@@ -41,3 +41,20 @@ After completing the project, I learn:
 
 Go to [Project 3 - Analyze A/B testing](P3-AB_Analysis)
 
+## Project 4 - Wrangle and Analyze Data
+
+Real-world data rarely comes clean. Using Python and its libraries, you will gather data from a variety of sources and in a variety of formats, assess its quality and tidiness, then clean it. This is called data wrangling. 
+
+[We rate dog](https://en.wikipedia.org/wiki/WeRateDogs) is a Twitter account that rates people's dogs with a humorous comment about the dog. These ratings almost always have a denominator of 10. The numerators, though? Almost always greater than 10. 11/10, 12/10, 13/10, etc. Why? Because "[they're good dogs Brent](https://knowyourmeme.com/memes/theyre-good-dogs-brent)." WeRateDogs has over 4 million followers and has received international media coverage.
+
+I start with the dataset that WeRateDog provided to Udacity as an archive. This archive contains basic tweet data (tweet ID, timestamp, text, etc.) for all 5000+ of their tweets as they stood on August 1, 2017. More on this soon. 
+
+After completing the project, I learn how to:
+
+* use python libraries and principles such as [data tidiness](https://ryanwingate.com/purpose/tidy-data/) to achieve the three steps of Data Wrangling
+  - Gather
+  - Assess
+  - Clean
+* analyze the clean data
+
+Go to [Project 4 - Wrangle and Analyze Data](P4-Data_wrangle)
