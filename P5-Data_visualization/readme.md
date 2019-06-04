@@ -794,159 +794,7 @@ pisa_clean.to_csv("pisa2012_clean.csv", index=False, encoding='latin-1')
 you see unusual points or outliers, take a deeper look to clean things up
 and prepare yourself to look at relationships between variables.
 
-
-```python
-# import all packages and set plots to be embedded inline
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sb
-from matplotlib.gridspec import GridSpec
-
-%matplotlib inline
-
-sb.set(style='white')
-
-# Load
-pisa_clean = pd.read_csv("pisa2012_clean.csv", encoding='latin-1');
-
-# Time withe parent as int
-pisa_clean.loc[:,'Study Time With Parent'] = pisa_clean['Study Time With Parent'].astype('int64')
-
-# Parents Presence
-parents_presence_dtype = pd.api.types.CategoricalDtype(categories=['Both','Single'])
-pisa_clean.loc[:,'Parents Presence'] = pisa_clean['Parents Presence'].astype(parents_presence_dtype)
-
-# Gender as category
-gender_dtype = pd.api.types.CategoricalDtype(categories=['Female','Male'])
-pisa_clean.loc[:,'Gender'] = pisa_clean.Gender.astype(gender_dtype)
-
-# Parent highest level of education as category
-parentHE_dtype = pd.api.types.CategoricalDtype(
-                    categories=['None','ISCED 1','ISCED 2','ISCED 3B, C','ISCED 3A, ISCED 4','ISCED 5B','ISCED 5A, 6'],
-                    ordered=True)
-pisa_clean.loc[:,'Parents Highest Education'] = pisa_clean['Parents Highest Education'].astype(parentHE_dtype)
-
-# Immigration as category
-immig_dtype = pd.api.types.CategoricalDtype(categories=['Native','Second-Generation','First-Generation'], ordered=True)
-pisa_clean.loc[:,'Immigration Status'] = pisa_clean['Immigration Status'].astype(immig_dtype)
-
-pisa_clean.head()
-
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Student Id</th>
-      <th>Gender</th>
-      <th>Country</th>
-      <th>Math Score</th>
-      <th>Reading Score</th>
-      <th>Science Score</th>
-      <th>Study Time With Parent</th>
-      <th>Parents Highest Education</th>
-      <th>Immigration Status</th>
-      <th>Parents Presence</th>
-      <th>Overall Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>Female</td>
-      <td>Albania</td>
-      <td>486.1427</td>
-      <td>406.2936</td>
-      <td>548.9929</td>
-      <td>0</td>
-      <td>ISCED 5A, 6</td>
-      <td>Native</td>
-      <td>Both</td>
-      <td>480.476400</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>3</td>
-      <td>Female</td>
-      <td>Albania</td>
-      <td>533.2684</td>
-      <td>401.2100</td>
-      <td>499.6643</td>
-      <td>2</td>
-      <td>ISCED 5A, 6</td>
-      <td>Native</td>
-      <td>Both</td>
-      <td>478.047567</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4</td>
-      <td>Female</td>
-      <td>Albania</td>
-      <td>412.2215</td>
-      <td>547.3630</td>
-      <td>438.6796</td>
-      <td>0</td>
-      <td>ISCED 5A, 6</td>
-      <td>Native</td>
-      <td>Both</td>
-      <td>466.088033</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>6</td>
-      <td>Female</td>
-      <td>Albania</td>
-      <td>396.3312</td>
-      <td>378.2544</td>
-      <td>384.3156</td>
-      <td>1</td>
-      <td>ISCED 3B, C</td>
-      <td>Native</td>
-      <td>Both</td>
-      <td>386.300400</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>7</td>
-      <td>Female</td>
-      <td>Albania</td>
-      <td>438.0823</td>
-      <td>373.2503</td>
-      <td>508.1499</td>
-      <td>0</td>
-      <td>ISCED 5A, 6</td>
-      <td>Native</td>
-      <td>Both</td>
-      <td>439.827500</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-### Gender representation
+### Gender distribution
 
 
 ```python
@@ -963,31 +811,9 @@ pisa_clean.Gender.value_counts()
 
 
 
-```python
-fig1, ax1 = plt.subplots(1, 1, figsize=(8, 8), sharex=True)
-patches, texts, autotexts = ax1.pie(pisa_clean.Gender.value_counts(), 
-                                    colors = ['#0f52ba','#0080ff'],
-                                    labels=['Female','Male'],
-                                    autopct='%1.1f%%',
-                                    startangle=90
-                                   );
-for text in texts:
-    text.set_color('grey')
-    
-for text in autotexts:
-    text.set_color('white')
-    
-ax1.axis('equal');
-plt.tight_layout();
-plt.title('Student gender distribution')
-plt.show();
-```
-
 
 ![png](output_29_0.png)
 
-
-**Student gender conlusion:**
     
 Both genders are equivalently represented, so there's no biased in the dataset.
 
@@ -1087,20 +913,6 @@ pisa_clean[['Overall Score','Math Score','Reading Score','Science Score']].descr
 </div>
 
 
-
-
-```python
-f, axes = plt.subplots(1, 1, figsize=(12, 7), sharex=True)
-sb.despine(left=True)
-sb.distplot(pisa_clean['Overall Score'], bins=20);
-
-x_ticks = np.arange(0, 1000 + 1, 100)
-plt.xticks(x_ticks, x_ticks);
-plt.setp(axes, yticks=[]);
-plt.xlabel('Overall score distribution');
-
-```
-
     /Users/rguitter/anaconda3/lib/python3.7/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
 
@@ -1110,28 +922,8 @@ plt.xlabel('Overall score distribution');
 
 
 
-```python
-f, axes = plt.subplots(1, 3, figsize=(17, 5), sharex=True)
-sb.despine(left=True)
-
-sb.distplot(pisa_clean['Math Score'], ax=axes[0], bins=20)
-sb.distplot(pisa_clean['Reading Score'], ax=axes[1], bins=20)
-sb.distplot(pisa_clean['Science Score'], ax=axes[2], bins=20)
-
-x_ticks = np.arange(0, 1000 + 1, 100)
-plt.xticks(x_ticks, x_ticks);
-plt.setp(axes, yticks=[])
-plt.tight_layout()
-plt.suptitle('Score distribution per discipline', y=1.02)
-plt.show();
-
-```
-
-
 ![png](output_34_0.png)
 
-
-**Scores distribution findings:**
 
 * All the score are normally distributed
 * Most of the students' scores are between 350 and 650 points.
@@ -1140,67 +932,16 @@ plt.show();
 ### Immigration status
 
 
-```python
-fig1, ax1 = plt.subplots(1, 1, figsize=(17, 8), sharex=True)
-patches, texts, autotexts = ax1.pie(pisa_clean['Immigration Status'].value_counts(), 
-                                    colors = ['#4c516d','#0080ff','#008ecc'],
-                                    labels=['Native', 'Second Generation', 'First Generation'], 
-                                    autopct='%1.1f%%',
-                                    startangle=180
-                                   );
-for text in texts:
-    text.set_color('grey')
-    
-for text in autotexts:
-    text.set_color('white')
-    
-ax1.axis('equal');
-plt.tight_layout();
-plt.title('Student immigration status distribution')
-plt.show();
-```
-
-
 ![png](output_37_0.png)
 
-
-**Immigration Status findings**:
 
 * Most of the students are native
 * First and second generation immigrants are equivalently reprensented in the dataset
 
 ### Parents highest education level
 
-
-```python
-plt.figure(figsize=[16, 12]);
-sb.countplot(x = 'Parents Highest Education', data = pisa_clean, color = sb.color_palette()[0]);
-
-# add annotations
-n_points = pisa_clean.shape[0]
-cat_counts = pisa_clean['Parents Highest Education'].value_counts()
-locs, labels = plt.xticks() # get the current tick locations and labels
-
-# loop through each pair of locations and labels
-for loc, label in zip(locs, labels):
-
-    # get the text property for the label to get the correct count
-    count = cat_counts[label.get_text()]
-    pct_string = '{:0.1f}%'.format(100*count/n_points)
-
-    # print the annotation just below the top of the bar
-    plt.text(loc, count-8, pct_string, ha = 'center', va='bottom', color = 'black')
-
-plt.ylabel('Nr. of parents');
-plt.xlabel('');
-plt.title('Highest parents education distribution', y = 1.02);
-```
-
-
 ![png](output_40_0.png)
 
-
-**Parent level of eduction conlusion:**
 
 * By far, most of the parents reach the upper secondary education level
 * The first stage of tertiary education is the most common level of education of the parent
@@ -1209,35 +950,8 @@ plt.title('Highest parents education distribution', y = 1.02);
 ### Study time with parents
 
 
-```python
-fig1, ax1 = plt.subplots(1, 2, figsize=(17, 8), sharex=True)
-
-sb.boxplot(x=pisa_clean['Study Time With Parent'], orient='v', ax=ax1[0]);
-ax1[0].set(ylabel='Nr of hours')
-
-five = pisa_clean[pisa_clean['Study Time With Parent'] < 6]['Study Time With Parent'].value_counts()
-
-patches, texts, autotexts = ax1[1].pie(five, 
-                                    colors = ['#4c516d','#003152','#0e4d92','#0f52ba','#0080ff','#008ecc'],
-                                    labels=['Not working with parent(s)', '1 hour', '2 hours', '3 hours', '4 hours', '5 hours'], 
-                                    autopct='%1.1f%%',
-                                    startangle=180
-                                   );
-for text in texts:
-    text.set_color('grey')    
-for text in autotexts:
-    text.set_color('white')
-ax1[1].axis('equal');
-
-plt.suptitle('Study time with parent(s) distribution')
-plt.show();
-```
-
-
 ![png](output_43_0.png)
 
-
-**Study time with parents findings:**
 
 * Some students work up to 30 hours with their parent(s).
 * Students working more than 5 hours with their parent(s) is very rare.
@@ -1247,62 +961,18 @@ plt.show();
 ### Parent presence
 
 
-```python
-fig1, ax1 = plt.subplots(1, 1, figsize=(17, 8), sharex=True)
-patches, texts, autotexts = ax1.pie(pisa_clean['Parents Presence'].value_counts(), 
-                                    colors = ['#4c516d','#008ecc'],
-                                    labels=['Both parents','Single parent'],
-                                    autopct='%1.1f%%',
-                                    startangle=90
-                                   );
-for text in texts:
-    text.set_color('grey')
-    
-for text in autotexts:
-    text.set_color('white')
-    
-ax1.axis('equal');
-plt.tight_layout();
-plt.suptitle('Parents presence distribution', y=1.02)
-plt.show();
-```
-
-
 ![png](output_46_0.png)
 
-
-**Single parent family findings**:
 
 * A significant part of the families are single parent
 
 ## Bivariate Exploration
 
-> In this section, investigate relationships between pairs of variables in your
-data. Make sure the variables that you cover here have been introduced in some
-fashion in the previous section (univariate exploration).
-
 ### Immigration status and scores
-
-
-```python
-data = pd.melt(pisa_clean, id_vars=['Student Id', 'Gender', 'Country', 'Study Time With Parent', 'Parents Highest Education', 'Immigration Status', 'Parents Presence'], 
-               value_vars=['Overall Score','Math Score','Reading Score','Science Score'], 
-               var_name="Score Type", value_name='Score')
-data['Score Type'] = data['Score Type'].replace('Overall Score', 'Overall').replace('Math Score','Math').replace('Reading Score','Reading').replace('Science Score','Science')
-
-plt.figure(figsize=[12, 16]);
-sb.boxplot(x = data['Score Type'], y = data['Score'], hue=data['Immigration Status'], palette = sb.color_palette('husl', 8))
-plt.title('Is strudying harder for non native students?');
-y_ticks = np.arange(0, 1000 + 1, 100)
-plt.yticks(y_ticks, y_ticks);
-
-```
 
 
 ![png](output_50_0.png)
 
-
-**Immigration status and scores findings:**
 
 * From an overall score point of view, studying seems slighly harder for non native students but the difference in score remains very low.
 * In Math, scores are similar between native and second generation strudents while the one for first generation is a bit less. This may be due to the abstract nature of mathematics (where the literary matters less). Afterall mathematics is oftenly quoted as the universal language.
@@ -1310,31 +980,9 @@ plt.yticks(y_ticks, y_ticks);
 ### Parent level education and scores
 
 
-```python
-#parents_he_scores = pisa_clean.groupby(['Parents Highest Education']).mean().reset_index()[['Parents Highest Education','Overall Score','Math Score','Reading Score','Science Score']]
-parents_he_scores = pisa_clean[['Parents Highest Education','Overall Score','Math Score','Reading Score','Science Score']]
-parents_he_scores.rename({'Overall Score':'Overall', 'Math Score':'Math', 'Reading Score':'Reading', 'Science Score':'Science'},axis=1, inplace=True)
-data = pd.melt(parents_he_scores, id_vars=['Parents Highest Education'], 
-               value_vars=['Overall','Math','Reading','Science'], 
-               var_name="Score Type", value_name='Score Value')
-
-fig, ax = plt.subplots(1, 1, figsize=(14, 12))
-
-ax = sb.pointplot(ax=ax, data = data, 
-                  x = 'Parents Highest Education', y='Score Value', hue='Score Type', 
-                  dodge=0.3, palette=sb.color_palette('husl', 8), 
-                  markers=["o", "x","x","x"], linestyles=["-", "--", "--", "--"]);
-#ax = sb.pointplot(ax=ax, data = pisa_clean, x = 'Parents Highest Education', y='Overall Score', hue='Parents Presence', markers=["o", "x","x","x"], linestyles=["-", "--", "--", "--"]);
-ax.set(xlabel='Parent Highest Education', ylabel='Score')
-plt.title("How parent(s) education impact the student socres ?", y=1.02);
-
-```
-
 
 ![png](output_53_0.png)
 
-
-**Parents Highest Education and Scores findings:**
 
 * The highest the parent education is, better the score is.
 * 'ISCED 3B, C' is an inflection point. By looking to the slope of the curve, we see that biggest score improvement lie before that point. 
@@ -1343,33 +991,9 @@ plt.title("How parent(s) education impact the student socres ?", y=1.02);
 ### Study time with parent(s) and scores
 
 
-```python
-scores = pisa_clean.groupby(['Study Time With Parent']).mean().reset_index()[['Study Time With Parent','Overall Score','Math Score','Reading Score','Science Score']]
-scores.rename({'Overall Score':'Overall', 'Math Score':'Math', 'Reading Score':'Reading', 'Science Score':'Science'}, axis=1, inplace=True)
-data = pd.melt(scores, id_vars=['Study Time With Parent'], 
-               value_vars=['Overall','Math','Reading','Science'], 
-               var_name="Score Type", value_name='Score')
-
-fig, ax = plt.subplots(1, 2, figsize=(25, 8))
-
-sb.lineplot(ax=ax[0], data = data, 
-            x = 'Study Time With Parent', y='Score', hue='Score Type'
-           );
-ax[0].set(title='Impact on the scores mean', xlabel='Nr. of hours', ylabel='Score')
-
-sb.heatmap(pisa_clean[['Overall Score','Math Score','Reading Score', 'Science Score', 'Study Time With Parent']].corr(), annot = True, fmt = '.3f',
-           cmap = 'vlag_r', center = 0)
-ax[1].set(title='Correlation between the scores and the time spent studying with parents.')
-
-plt.suptitle("Do students studying with their parent(s) score better than the others?", y=1.02);
-
-```
-
 
 ![png](output_56_0.png)
 
-
-**Study time with parent(s) and scores findings:**
 
 * First let's remember from the univariate exploration that it's very rare that students spend more than 5 hours sudying with their parent(s).
 * From the visualization of the scores mean, we see that:
@@ -1378,28 +1002,6 @@ plt.suptitle("Do students studying with their parent(s) score better than the ot
 * From the visualization correlations, we get the confirmation that there's a weak negative correlation between scores and study time with parent. This looks normal since we expect of students from that age to be autonomous.
 
 ### Single parent and scores
-
-
-```python
-data = pd.melt(pisa_clean, id_vars=['Student Id', 'Gender', 'Country', 'Study Time With Parent', 'Parents Highest Education', 'Immigration Status', 'Parents Presence'], 
-               value_vars=['Overall Score','Math Score','Reading Score','Science Score'], 
-               var_name="Score Type", value_name='Score')
-data['Score Type'] = data['Score Type'].replace('Overall Score', 'Overall').replace('Math Score','Math').replace('Reading Score','Reading').replace('Science Score','Science')
-
-palette = sb.color_palette("Paired")
-
-plt.figure(figsize = [15, 14])
-ax = sb.violinplot(x = 'Score', y='Score Type', hue='Parents Presence',
-                   data=data, palette=palette, split=True,
-                   scale="count", inner="quartile");
-
-x_ticks = np.arange(0, 1000 + 1, 100)
-plt.xticks(x_ticks, x_ticks);
-plt.title("Is studying harder for the single parent students?");
-
-
-
-```
 
 
 
@@ -1412,8 +1014,6 @@ plt.title("Is studying harder for the single parent students?");
 ![png](output_59_1.png)
 
 
-**Parents presence and score findings**:
-
 * Scores for single parent and two-parent are normally distributed.
 * Compate to those of students living with two-parent family, the scores of students living in a single parent family are significanlty less (by approximatly 20 points).
 
@@ -1424,17 +1024,6 @@ Since I'm mainly interested in the impact of the parents on the scores, I want t
 
 
 
-```python
-plt.figure(figsize = [8, 6])
-
-ax = sb.pointplot(data = pisa_clean, 
-                  x = 'Immigration Status', y = 'Overall Score', hue = 'Parents Presence',
-                  palette = sb.color_palette("Paired")
-                 );
-
-plt.title('Is it harder for a non native student coming from a single parent family?');
-```
-
 
 ![png](output_62_0.png)
 
@@ -1442,16 +1031,6 @@ plt.title('Is it harder for a non native student coming from a single parent fam
 From the bivariate observation, we found that the scores of a student from a single parent family was about 20 points less than for a two-parent family is about 20 points. Now we see that this difference is getting worst if the student is a native.
 
 
-```python
-plt.figure(figsize = [17, 6])
-
-#ax = sb.barplot(data = pisa_clean[pisa_clean['Study Time With Parent'] > 5], x = 'Study Time With Parent', y = 'Overall Score', hue = 'Parents Presence')
-ax = sb.pointplot(data = pisa_clean[pisa_clean['Study Time With Parent'] > 5], 
-                  x = 'Study Time With Parent', y = 'Overall Score', hue = 'Parents Presence',
-                  dodge = 0.1, palette = sb.color_palette('Paired')
-                 )
-ax.legend(loc = 8, ncol = 3, framealpha = 1, title = 'Parent Presence');
-```
 
 
 ![png](output_64_0.png)
@@ -1461,13 +1040,6 @@ From bivariate observation, we found that when studying time with parent(s) is a
 Also, we see that the difference of score between single parent and two-parent family is greater 20 points (the overall difference we obersve between scores).
 
 
-```python
-plt.figure(figsize = [14, 12])
-ax = sb.pointplot(data = pisa_clean, 
-                  x = 'Parents Highest Education', y='Overall Score', hue='Parents Presence', 
-                  palette = sb.color_palette("Paired"));
-
-```
 
 
 ![png](output_66_0.png)
@@ -1479,6 +1051,3 @@ Now we see that this not 'ISCED 3B, C' is trully an inflection point for single 
 Prior observations on Parent Highest Education impact are unchanged for education level comprised between None and the Upper secondary (ISCED 3B). However, beyond that point, we see that the Highest Parent Education are more positive impact on the score when the student comes from a two-parent family.
 
 
-```python
-
-```
