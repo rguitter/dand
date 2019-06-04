@@ -485,15 +485,6 @@ pisa_clean = pisa_clean.drop(['Mother Present','Father Present'], axis=1)
 pisa_clean.head()
 ```
 
-    /Users/rguitter/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:1: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
-      """Entry point for launching an IPython kernel.
-
-
-
 
 
 <div>
@@ -1005,12 +996,6 @@ pisa_clean[['Overall Score','Math Score','Reading Score','Science Score']].descr
 
 
 
-
-    Text(0.5, 1.0, 'Is studying harder for the single parent students?')
-
-
-
-
 ![png](output_59_1.png)
 
 
@@ -1051,3 +1036,10 @@ Now we see that this not 'ISCED 3B, C' is trully an inflection point for single 
 Prior observations on Parent Highest Education impact are unchanged for education level comprised between None and the Upper secondary (ISCED 3B). However, beyond that point, we see that the Highest Parent Education are more positive impact on the score when the student comes from a two-parent family.
 
 
+## Preparation of the presentation
+
+I will re-use most of the figures because I already polish it. However the boxplot for the TimeStudyWithParent is not good looking and the pie need to be rework to display hours beyong 5 as one slice.
+
+The presentation require also to resize some of the figures and also to polish the title and the axis labels (wording, position, size).
+
+Most of the slide title are shaped as questions to raise the attention to the attendies. The same goes for the title of the figure.
