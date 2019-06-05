@@ -76,4 +76,4 @@ After completing the project, I learn how to:
 Go to [Project 5 - Data visualization](P5-Data_visualization)
 
 
-![dand_certificate](dand_certificat.svg)
+![dand_certificate](dand_certificate.svg)
