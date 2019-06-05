@@ -1,6 +1,7 @@
 # Udacity Data Analyst Nanodegree
 
 ![dand_certificate](dand_certificate.svg)
+[Udacity Nanodegree Graduate](https://graduation.udacity.com/confirm/6CPVHLK6)
 
 ## Project 1 - Explore weather trends
 
