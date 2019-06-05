@@ -74,3 +74,6 @@ After completing the project, I learn how to:
 * tell a friendly story by making a slide deck from a notebook. The making of implies organising the findings of the exploration into a story then choosing and polishing the plots that would best illustrate the findings.
 
 Go to [Project 5 - Data visualization](P5-Data_visualization)
+
+
+![dand_certificate](dand_certificat.svg)
