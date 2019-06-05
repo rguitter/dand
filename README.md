@@ -58,3 +58,19 @@ After completing the project, I learn how to:
 * analyze the clean data
 
 Go to [Project 4 - Wrangle and Analyze Data](P4-Data_wrangle)
+
+## Project 5 - Data visualization
+
+This project has two parts that demonstrate the importance and value of data visualization techniques in the data analysis process. First part make use of Python visualization libraries to systematically explore a selected dataset, starting from plots of single variables and building up to plots of multiple variables. Second part aim at producing a short presentation that illustrates interesting properties, trends, and relationships that you discovered in your selected dataset. The primary method of conveying the findings will be through transforming the exploratory visualizations from the first part into polished, explanatory visualizations.
+
+I choose to work on the PISA 2012 survey. The Programme for International Student Assessment (PISA) is a triennial international survey which aims to evaluate education systems worldwide by testing the skills and knowledge of 15-year-old students who are nearing the end of their compulsory education. PISA assesses how well they can apply what they learn in school to real-life situations.
+
+This dataset contains the result of the survey for 2012.
+
+After completing the project, I learn how to:
+
+* use univariate, bivariate, and multivariate plots to explore relationship in the dataset.
+* depict my findings with the appropriate plots
+* tell a friendly story by making a slide deck from a notebook. The making of implies organising the findings of the exploration into a story then choosing and polishing the plots that would best illustrate the findings.
+
+Go to [Project 5 - Data visualization](P5-Data_visualization)
